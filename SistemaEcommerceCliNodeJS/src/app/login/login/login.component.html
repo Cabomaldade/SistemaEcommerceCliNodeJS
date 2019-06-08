@@ -1,0 +1,70 @@
+
+<!--<h5>Login</h5>
+<div class="row">
+  <form [formGroup] = "form" (ngSubmit) = "onSignin()">
+    <div class="row">
+      <div class="form-group">
+        <input id="email" type="email" class="validate"
+                  formControlName="email"
+                  [class.invalid]="form.controls['email'].touched && !form.controls['email'].valid">
+        <label for="email"
+              data-error="invalid email">
+              Email    
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group">
+        <input id="password" type="password" class="validate"
+                  formControlName="password"
+                  [class.invalid]="form.controls['password'].touched && !form.controls['password'].valid">
+        <label for="password"
+              data-error="invalid password">
+              Password    
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group">
+        <button class="btn btn-primary" type="submit"
+                [disabled]="!form.valid">
+                Entrar
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+-->
+
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <img src=".\assets\img\logo.jpg" id="icon" alt="User Icon" />
+    </div>
+
+    <!-- Login Form -->
+    <form [formGroup] = "form" (ngSubmit) = "onSignin()">
+      <input type="email" id="email" class="fadeIn second" placeholder="e-mail"
+      formControlName="email"
+      [class.invalid]="form.controls['email'].touched && !form.controls['email'].valid"
+      class="validate"
+      >
+
+      <input type="password" id="password" class="fadeIn third" placeholder="password"
+              formControlName="password"
+              [class.invalid]="form.controls['password'].touched && !form.controls['password'].valid"
+      >
+
+      <input type="submit" class="fadeIn fourth" value="Login" [disabled]="!form.valid" >
+    </form>
+
+    <!-- Remind Passowrd -->
+    <div id="formFooter">
+      <a class="underlineHover" href="#">Forgot Password?</a>
+    </div>
+
+  </div>
+</div>

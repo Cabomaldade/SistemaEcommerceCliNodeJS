@@ -1,0 +1,68 @@
+{
+  "name": "sistemaecommercecli",
+  "version": "0.0.0",
+  "license": "MIT",
+  "angular-cli": {},
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "test": "ng test",
+    "pree2e": "webdriver-manager update --standalone false --gecko false",
+    "e2e": "protractor"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/common": "^7.2.15",
+    "@angular/compiler": "^7.2.15",
+    "@angular/core": "^7.2.15",
+    "@angular/forms": "^7.2.15",
+    "@angular/http": "^7.2.15",
+    "@angular/platform-browser": "^7.2.15",
+    "@angular/platform-browser-dynamic": "^7.2.15",
+    "@angular/router": "^7.2.15",
+    "bootstrap": "^4.3.1",
+    "core-js": "^2.6.6",
+    "core-util-is": "^1.0.2",
+    "jquery": "^3.4.1",
+    "nyc": "^14.1.1",
+    "popper.js": "^1.15.0",
+    "rxjs": "^6.5.2",
+    "rxjs-compat": "^6.0.0-rc.0",
+    "ts-helpers": "^1.1.1",
+    "tslib": "^1.9.0",
+    "zone.js": "^0.8.29"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "~0.13.0",
+    "@angular/cli": "^7.3.9",
+    "@angular/compiler-cli": "^7.2.15",
+    "@types/jasmine": "2.5.38",
+    "@types/node": "^6.14.6",
+    "codelyzer": "~2.0.0-beta.1",
+    "jasmine-core": "2.5.2",
+    "jasmine-spec-reporter": "2.5.0",
+    "karma": "^4.1.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-cli": "^1.0.1",
+    "karma-jasmine": "^1.0.2",
+    "karma-remap-istanbul": "^0.6.0",
+    "protractor": "^6.0.0",
+    "ts-node": "1.2.1",
+    "tslint": "^4.3.0",
+    "typescript": "~3.2.4"
+  },
+  "description": "This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.28.3.",
+  "main": "karma.conf.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cabomaldade/SistemaEcommerceCLI.git"
+  },
+  "keywords": [
+    "ab"
+  ],
+  "author": "andre",
+  "bugs": {
+    "url": "https://github.com/Cabomaldade/SistemaEcommerceCLI/issues"
+  },
+  "homepage": "https://github.com/Cabomaldade/SistemaEcommerceCLI#readme"
+}

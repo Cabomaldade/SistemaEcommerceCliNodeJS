@@ -1,0 +1,23 @@
+<div class="divenquete">
+  <table class="table">
+      <thead>
+          <tr>
+              <th scope="col">Marca</th>
+              <th scope="col">Likes</th>
+              <th scope="col">Dislikes</th>
+              <th scope="col">Deixe Seu Like :) ou Dislike :(</th>
+          </tr>
+      </thead>
+     <tbody >
+         <tr *ngFor="let celular of celulares">
+             <td scope="row"> {{ celular.marca }} </td>
+             <td scope="row"> {{ celular.like }} </td>
+             <td scope="row"> {{ celular.dislike }} </td>
+             <td scope="row">
+                 <img class="img-thumbnail" height="42" width="42" src="../../assets/img/like.png" (click)="likeUp (celular)"/>
+                 <img class="img-thumbnail" height="42" width="42" src="../../assets/img/dislike.png" (click)="dislikeUp (celular)"/>
+             </td>
+         </tr>
+     </tbody> 
+  </table>
+</div>
