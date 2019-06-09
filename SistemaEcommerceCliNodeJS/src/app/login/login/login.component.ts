@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
     private authService: LoginServiceService) {}
 
   onSignin(){
+    //this.authService.signIn(this.form.value); back funcionando
     this.authService.signIn(this.form.value);
   }
 

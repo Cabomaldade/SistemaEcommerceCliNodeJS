@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs/Subscription';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -9,6 +10,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
+import { toBase64String } from '@angular/compiler/src/output/source_map';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +20,8 @@ export class LoginServiceService {
   //public token: string;  Usado para implementar o Interceptor + avancado.
 
   private uri: string = "http://localhost:8080/login";
+
+  private uri2: string = "http://localhost:3000/login"; // criado o back no NodeJs
 
   public showNavBarEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -31,52 +35,29 @@ export class LoginServiceService {
 
 
   signIn(user: User) {
-    this.getLogin(user).subscribe(
+    this.postLogin(user).subscribe(
       us => {
         if (us.email === user.email) {
           this.authenticated = true;
           this.showNavBar(true);
           this.router.navigate(['/']);
-        }else{
+        } else {
           this.authenticated = false;
           this.showNavBar(false);
-          this.router.navigate(['/signin']);
+          this.router.navigate(['/signin'])
+          alert("Usuário ou senha inválidos");
         }
       },
       err => { console.log(err) }
     );
-
-    /*  us => {
-        if (HttpResponse.toString === "200") {
-          this.authenticated = true;
-          this.showNavBar(true);
-          this.router.navigate(['/']);
-        } else { this.authenticated = false;}
-      },  
-      err => {console.log("Está Autenticado : " + this.authenticated)}
-    )*/
-
   }
 
-
-  /*this.getLogin(user).subscribe(test =>  console.log("Entrou Aqui!" + user.email)); funfou aqui!
-
-  this.getLogin(user).subscribe(this.getLogin);
-
-  if((user.email === 'test@test.com' || user.email === 'user@user.com' && user.password === '12345')) {
-    this.authenticated = true;
-    this.showNavBar(true);
-    this.router.navigate(['/']);
-  } else{
-    this.authenticated = false;  // O intercept vai melhorar essa logica aqui.
-  }
-}*/
-
-  getLogin(user: User): Observable<User> {
-    return this.http.post(`${this.uri}`, user, {headers: this.getHeaders()})
+  postLogin(user: User): Observable<User> {
+    return this.http.post(`${this.uri2}`, user, { headers: this.getHeaders() })
       .map((res: Response) => res.json())
       .catch(this.handleError)
   }
+
 
   isAuthenticated() {
     return this.authenticated;
@@ -108,11 +89,67 @@ export class LoginServiceService {
 
   private handleError(error: any) {
     let erro = error.messsage || 'Server error';
-    console.log('Ocorreu um erro ' , error);
+    console.log('Ocorreu um erro ', error);
     return Observable.throw(erro);
   }
 
-  private guardarResp(response: Response){
-    
+
+  /*  us => {
+      if (HttpResponse.toString === "200") {
+        this.authenticated = true;
+        this.showNavBar(true);
+        this.router.navigate(['/']);
+      } else { this.authenticated = false;}
+    },  
+    err => {console.log("Está Autenticado : " + this.authenticated)}
+  )*/
+  /*this.getLogin(user).subscribe(test =>  console.log("Entrou Aqui!" + user.email)); funfou aqui!
+
+  this.getLogin(user).subscribe(this.getLogin);
+
+  if((user.email === 'test@test.com' || user.email === 'user@user.com' && user.password === '12345')) {
+    this.authenticated = true;
+    this.showNavBar(true);
+    this.router.navigate(['/']);
+  } else{
+    this.authenticated = false;  // O intercept vai melhorar essa logica aqui.
+  }
+}
+
+  
+
+  getAll(): Observable<User[]> {
+    return this.http.get(`${this.uri2}`)
+      .map(res => res.json())
+      .catch(this.handleError);
+  }
+
+  singIn2(user: User) {
+    this.get(user.email, user.password).subscribe(
+      us => {
+        if (us.email === user.email) {
+          this.authenticated = true;
+          this.showNavBar(true);
+          this.router.navigate(['/']);
+        } else {
+          this.authenticated = false;
+          this.showNavBar(false);
+          this.router.navigate(['/signin']);
+        }
+      },
+      err => { console.log(err) }
+    );
+  }
+
+  get(email: string, password: string) {
+    return this.getAll()
+           .map((list: any) => list.find(user => (user.email == email) && (user.password == password)))
+           .catch(this.handleError);
+  }
+
+  */
+
+  private guardarResp(response: Response) {
+
   }
 }
