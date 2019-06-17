@@ -15,11 +15,13 @@ app.use((req, res, next) => {
 })
 const usersRoutes = require('./api/routes/users');
 const codesRoutes = require('./api/routes/codes');
-const mongoose = require('mongoose'); // Tipo um middleware entre o NodeJs e o MongoDB
-mongoose.connect('mongodb://127.0.01:27017/sistema_ecommerce_cli', {useNewUrlParser: true}, (err) => {
-    if (err) throw err;
-    console.log('Successfully connected to .');
-});
+const mongoose = require('mongoose'); // importing mongoose
+mongoose.connect(
+    "mongodb+srv://cabomaldade:" +
+    process.env.MONGO_ATLAS_PW +
+    "@cluster0-mpbti.mongodb.net/test?retryWrites=true&w=majority",
+    { useNewUrlParser: true } 
+);
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
