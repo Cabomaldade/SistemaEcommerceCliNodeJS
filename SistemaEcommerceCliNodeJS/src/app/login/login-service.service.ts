@@ -37,7 +37,7 @@ export class LoginServiceService {
   signIn(user: User) {
     this.postLogin(user).subscribe(
       us => {
-        if (us.email === user.email) {
+        if (us.status === 200) { //Fazendo assim e buscando só pela resposta
           this.authenticated = true;
           this.showNavBar(true);
           this.router.navigate(['/']);
@@ -52,9 +52,9 @@ export class LoginServiceService {
     );
   }
 
-  postLogin(user: User): Observable<User> {
+  postLogin(user: User): Observable<Response> {
     return this.http.post(`${this.uri2}`, user, { headers: this.getHeaders() })
-      .map((res: Response) => res.json())
+      .map((res: Response) => res)
       .catch(this.handleError)
   }
 

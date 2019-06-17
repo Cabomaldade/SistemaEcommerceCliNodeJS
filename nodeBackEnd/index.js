@@ -36,9 +36,9 @@ app.post('/login', function (req, res) {
     var password = req.body.password;
     console.log("Email = " + user_name + ", password is " + password);
     //res.end("yes");
-    var temp = usuarios.find(usuarios => (usuarios.email == user_name) && (usuarios.password == password))
-    if(temp){
-        res.json(temp);
+    if(usuarios.find(usuarios => (usuarios.email == user_name) && (usuarios.password == password))){
+        res.sendStatus(200).send("Usuário Logado");
+    
     }
     else{
         res.json("Usuario ou senha nao conferem");
