@@ -41,11 +41,16 @@ export class LoginServiceService {
           this.authenticated = true;
           this.showNavBar(true);
           this.router.navigate(['/']);
-        } else {
+
+        } else if (us.status == 400) {
+          alert('Erro 400');
+        }
+        else {
           this.authenticated = false;
           this.showNavBar(false);
           this.router.navigate(['/signin'])
           alert("Usuário ou senha inválidos");
+
         }
       },
       err => { console.log(err) }
@@ -53,9 +58,9 @@ export class LoginServiceService {
   }
 
   postLogin(user: User): Observable<Response> {
-    return this.http.post(`${this.uri2}`, user, { headers: this.getHeaders() })
+    return this.http.post(`${this.uri2}` + "/obtendo-id", user, { headers: this.getHeaders() })
       .map((res: Response) => res)
-      .catch(this.handleError)
+      .catch(this.handleError);
   }
 
 

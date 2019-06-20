@@ -7,6 +7,7 @@ const app = express();
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.set("json spaces", 4);
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -14,7 +15,10 @@ app.use(function(req, res, next) {
     next();
   });
 
-app.get("/", (req, res) => res.json({ status: "Nodejs backend" }));
+module.exports = app => {
+    app.get("/", (req, res) => res.json({ status: "Nodejs backend" }));
+}
+
 
 app.get("/clientes", (req, res) => {
     res.json(
@@ -25,7 +29,7 @@ app.get("/clientes", (req, res) => {
         ]
     );
 });
-
+/*
 // criei esse array de usuários para testar o back, funcionando
 var usuarios  = [
                 { 'codigo': 1, 'email': 'test@test.com', 'password': '12345' },
@@ -45,7 +49,7 @@ app.post('/login', function (req, res) {
     }   
  });
 
-/*
+
 const axios = require('axios')
 
 axios.post('localhost:4200/todos', {

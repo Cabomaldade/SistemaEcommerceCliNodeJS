@@ -16,12 +16,25 @@ app.use((req, res, next) => {
 const usersRoutes = require('./api/routes/users');
 const codesRoutes = require('./api/routes/codes');
 const mongoose = require('mongoose'); // importing mongoose
+
 mongoose.connect(
+    'mongodb://localhost:27017/ClientesDB',
+    { useNewUrlParser: true },
+    (err) => {
+        if (!err) {
+            console.log('MongoDB está conectado!');
+        } else {
+            console.log('Ocorreu um erro com a conexao: ' + err);
+        }
+    }
+);
+/*mongoose.connect(
     "mongodb+srv://cabomaldade:" +
     process.env.MONGO_ATLAS_PW +
     "@cluster0-mpbti.mongodb.net/test?retryWrites=true&w=majority",
     { useNewUrlParser: true } 
 );
+*/ //Esta conexão utilizei para acesso na nuvem AWS - mudei para MongoDB local
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

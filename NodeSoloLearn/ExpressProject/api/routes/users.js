@@ -5,6 +5,7 @@ const User = require('../models/user');
 const mongoose = require('mongoose');
 
 router.get('/', (req, res, next) => {
+    console.log("Entrou no GET padrao!");
     User.find()          // If I dont pass an argument, it will find all the elements  
         .exec()
         .then(docs => {
@@ -23,6 +24,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
+    console.log("chamou!");
     const user = new User({
         _id: new mongoose.Types.ObjectId(), // aqui usa mongoose para criar um ID
         name: req.body.name,

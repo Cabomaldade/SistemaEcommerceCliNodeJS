@@ -10,7 +10,8 @@ import 'rxjs/add/observable/throw';
 @Injectable()
 export class ClientesService {
 
-  private url: string = "http://localhost:8080/clientes";
+  private url2: string = "http://localhost:8080/clientes";
+  private url: string = "http://localhost:3000/clientes";
 
   clientesChanged = new EventEmitter<Observable<Cliente[]>>();
 
