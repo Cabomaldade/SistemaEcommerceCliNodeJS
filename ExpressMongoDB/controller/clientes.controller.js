@@ -3,10 +3,10 @@ var router = express.Router();
 const mongoose = require('mongoose');
 const Cliente = mongoose.model('Cliente');
 
-
+// Get all 
 router.get('/', (req, res) => {
     console.log("Entrou no GET padrao!");
-    Cliente.find()          // If I dont pass an argument, it will find all the elements  
+    Cliente.find()          // se passar o find sem objetos, traz todos no database  
         .exec()
         .then(docs => {
             //console.log(docs);
@@ -20,14 +20,15 @@ router.get('/', (req, res) => {
         });
 });
 
+// post funcionando normalmente, é cadastrado um usuário
 router.post('/', (req, res) => {
-    console.log("chamou!");
+    
     var idIncremento = 0;
-    do{
+    do {
         idIncremento = Math.floor(Math.random() * (10000 - 1000) + 1000);
         console.log("mais uma");
         console.log(gerarCodigo(idIncremento));
-    }while(gerarCodigo(idIncremento));
+    } while (gerarCodigo(idIncremento));
 
     const cliente = new Cliente({
         _id: new mongoose.Types.ObjectId(), // aqui usa mongoose para criar um ID
@@ -58,17 +59,17 @@ router.post('/', (req, res) => {
         });
 });
 
-router.get('/:userID', (req, res, next) => {
-    const id = req.params.userID;
-    console.log(id);
-    User.findById(id)
+// get está funcionando buscando por código
+router.get('/:codigo', (req, res) => {
+    const _codigo = req.params.codigo;
+    Cliente.findOne({ codigo: _codigo })
         .exec()
         .then(doc => {
-            console.log("From database", doc);
+            console.log("Vindo do banco de dados ", doc);
             if (doc) {
                 res.status(200).json(doc);
             } else {
-                res.status(404).json({ message: 'No valid entry found for provided ID' });
+                res.status(404).json({ message: 'Não há entradas para o código fornecido' });
             }
         })
         .catch(err => {
@@ -77,13 +78,16 @@ router.get('/:userID', (req, res, next) => {
         });
 });
 
-router.patch('/:clienteID', (req, res) => { // update com mongoose
-    const id = req.params.clienteID;
-    const updateOps = {};
+// update funcionando pelo código --> muito bom aqui, recebe os parâmetros todos juntos e só os que recebe
+// atualiza
+router.patch('/', (req, res) => { // update com mongoose
+    /*const updateOps = {};
     for (const ops of req.body) {
-        updateOps[ops.propName] = ops.value;
-    }
-    Cliente.update({ _id: id }, { $set: updateOps })
+        updateOps[ops.propName] = ops.value; $set: updateOps
+    }*/
+    var clienteAtualizado = req.body;
+    var _codigo = req.body.codigo
+    Cliente.update({codigo: _codigo},{$set: clienteAtualizado})
         .exec()
         .then(result => {
             console.log(result);
@@ -97,9 +101,10 @@ router.patch('/:clienteID', (req, res) => { // update com mongoose
         });
 });
 
-router.delete('/:clienteID', (req, res) => {
-    const id = req.params.clienteID;
-    Cliente.remove({ _id: id })
+//Delete funcionando - deletando pelo código enviado do front
+router.delete('/:codigo', (req, res) => {
+    const _codigo = req.params.codigo;
+    Cliente.deleteOne({ codigo: _codigo })
         .exec()
         .then(result => {
             res.status(200).json(result)
@@ -112,10 +117,11 @@ router.delete('/:clienteID', (req, res) => {
         });
 });
 
+// Função bacana implementada, gerando códigos aleatórios entre 1000 e 10000
 function gerarCodigo(codigo) {
-    var procuraCodigo = Cliente.find({codigo: codigo}, 'codigo');
-    if(procuraCodigo == codigo){
-            return true;
+    var procuraCodigo = Cliente.find({ codigo: codigo }, 'codigo');
+    if (procuraCodigo == codigo) {
+        return true;
     }
     return false;
 }

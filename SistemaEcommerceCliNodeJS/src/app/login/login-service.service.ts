@@ -41,11 +41,7 @@ export class LoginServiceService {
           this.authenticated = true;
           this.showNavBar(true);
           this.router.navigate(['/']);
-
-        } else if (us.status == 400) {
-          alert('Erro 400');
-        }
-        else {
+        } else {
           this.authenticated = false;
           this.showNavBar(false);
           this.router.navigate(['/signin'])

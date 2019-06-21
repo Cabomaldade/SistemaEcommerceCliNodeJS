@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 var clienteSchema = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     codigo: {
-        type: Number
+        type: Number,
+        
     },
     nome: {
         type: String,
