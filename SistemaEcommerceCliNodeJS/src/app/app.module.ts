@@ -10,7 +10,8 @@ import { MenuComponent } from './menu/menu.component';
 import { HomeComponent } from './home/home.component';
 import { RoutingModule } from './app.router';
 import { LoginComponent } from './login/login/login.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpErrorInterceptor } from './httpErrorInterceptor';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,12 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   providers: [
     LoginServiceService,
-    AuthGuard
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true,
+    }
   ],
   bootstrap: [AppComponent]
 })

@@ -14,9 +14,10 @@ router.post('/obtendo-id', (req, res) => {
         .then(doc => {
             console.log("From database", doc);
             if (doc) {
-                res.status(200).json(doc);
+                res.status(200).json("Usuário Validado!");
             } else {
                 res.status(404).json({ message: 'Não há usuários cadastrados com este e-mail e senha!' });
+                //res.json("Usuário Negado!"); Outra forma sem interceptor
             }
         })
         .catch(err => {

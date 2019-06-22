@@ -78,8 +78,7 @@ router.get('/:codigo', (req, res) => {
         });
 });
 
-// update funcionando pelo código --> muito bom aqui, recebe os parâmetros todos juntos e só os que recebe
-// atualiza
+// update funcionando pelo código 
 router.patch('/', (req, res) => { // update com mongoose
     /*const updateOps = {};
     for (const ops of req.body) {
@@ -101,7 +100,7 @@ router.patch('/', (req, res) => { // update com mongoose
         });
 });
 
-//Delete funcionando - deletando pelo código enviado do front
+//Delete funcionando - deletando pelo código enviado do front 
 router.delete('/:codigo', (req, res) => {
     const _codigo = req.params.codigo;
     Cliente.deleteOne({ codigo: _codigo })
@@ -117,7 +116,7 @@ router.delete('/:codigo', (req, res) => {
         });
 });
 
-// Função bacana implementada, gerando códigos aleatórios entre 1000 e 10000
+// Função implementada, gerando códigos aleatórios entre 1000 e 10000 @Cabomaldade
 function gerarCodigo(codigo) {
     var procuraCodigo = Cliente.find({ codigo: codigo }, 'codigo');
     if (procuraCodigo == codigo) {

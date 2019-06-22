@@ -6,16 +6,17 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class ClientesService {
 
-  private url2: string = "http://localhost:8080/clientes";
+  //private url2: string = "http://localhost:8080/clientes";
   private url: string = "http://localhost:3000/clientes";
 
   clientesChanged = new EventEmitter<Observable<Cliente[]>>();
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private _http: HttpClient) { }
 
   getAll(): Observable<Cliente[]> {
     return this.http.get(this.url)
