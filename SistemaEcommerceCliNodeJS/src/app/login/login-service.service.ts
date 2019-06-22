@@ -194,9 +194,11 @@ export class LoginServiceService {
            .catch(this.handleError);
   }
 
-  */
-
+  
   private guardarResp(response: Response) {
 
   }
+
+  */
+
 }

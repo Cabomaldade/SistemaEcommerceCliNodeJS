@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 
 const clientesController = require('./controller/clientes.controller');
 const loginController = require('./controller/login.controller');
+const todoController = require('./controller/todo.controller');
+const enqueteController = require('./controller/enquete.controller');
 
 var app = express();
 
@@ -27,6 +29,9 @@ app.listen(3000, () => {
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use('/clientes', clientesController); // com este controlador acesso a nova rota criada para clientes
-app.use('/login', loginController);
+app.use('/login', loginController); // com este controlador acesso a nova rota criada para login
+app.use('/todo', todoController); // com este controlador acesso a nova rota criada para todo
+app.use('/enquete', enqueteController);  // com este controlador acesso a nova rota criada para enquete
+
 
 // nodemon server.js reinicia o servidor cada vez que você salvar, ao invés de usar node server.js

@@ -15,3 +15,5 @@ mongoose.connect(
 
 require('./cliente.model'); // após criar o schema devo colocar aqui para que o banco use o modelo cliente exportado
 require('./login.model');
+require('./todo.model');
+require('./enquete.model');
